@@ -18,4 +18,22 @@ class MarsRoverTest {
         val output = execute(input)
         assertEquals("0:0:E", output)
     }
+    @Test
+    fun `turn rover right twice`() {
+        val input = "RR"
+        val output = execute(input)
+        assertEquals("0:0:S", output)
+    }
+    @Test
+    fun `turn rover right three times`() {
+        val input = "RRR"
+        val output = execute(input)
+        assertEquals("0:0:W", output)
+    }
+    @Test
+    fun `turn rover right four times`() {
+        val input = "RRRR"
+        val output = execute(input)
+        assertEquals("0:0:N", output)
+    }
 }

@@ -2,10 +2,11 @@ package marsrover
 
 fun execute(input: String) : String {
 
-    return if (input == "R") {
-        "0:0:E"
-    } else {
-        "0:0:N"
+    return "0:0:" + when (input) {
+        "R" -> "E"
+        "RR" -> "S"
+        "RRR" -> "W"
+        else -> "N"
     }
 
 }
