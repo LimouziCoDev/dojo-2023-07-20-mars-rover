@@ -7,9 +7,15 @@ import kotlin.test.assertEquals
 class MarsRoverTest {
 
     @Test
-    fun `Intialisation du rover`() {
+    fun `initialize rover`() {
         val input = ""
         val output = execute(input)
         assertEquals("0:0:N", output)
+    }
+    @Test
+    fun `turn rover right`() {
+        val input = "R"
+        val output = execute(input)
+        assertEquals("0:0:E", output)
     }
 }
