@@ -3,14 +3,23 @@ package marsrover
 fun execute(input: String): String {
 
     var direction: Direction = North
-    for (command in input) {
+    for (character in input) {
+        val command = toCommand(character)
         direction = when (command) {
-            'R' -> direction.turnRight()
-
-            else -> direction.turnLeft()
+            Command.RIGHT -> direction.turnRight()
+            Command.LEFT-> direction.turnLeft()
         }
     }
     return "0:0:$direction"
+}
+
+ fun toCommand(character: Char) = Command.values().first { it.c == character }
+
+
+enum class Command(val c: Char) {
+    RIGHT('R'),
+    LEFT('L'),
+
 }
 
 sealed interface Direction {
