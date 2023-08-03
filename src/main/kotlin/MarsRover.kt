@@ -2,44 +2,53 @@ package marsrover
 
 fun execute(input: String): String {
 
-    var direction = "N"
+    var direction: Direction = North
     for (command in input) {
         direction = when (command) {
-            'R' -> nextTurnRight(direction)
+            'R' -> direction.turnRight()
 
-            else -> nextTurnLeft(direction)
+            else -> direction.turnLeft()
         }
     }
     return "0:0:$direction"
 }
 
-
-enum class Turn {
-    LEFT, RIGHT
+sealed interface Direction {
+    fun turnLeft(): Direction
+    fun turnRight(): Direction
 }
 
-private fun nextTurnLeft(direction: String) = changeDirection(Turn.LEFT, direction)
+object North : Direction {
+    override fun turnLeft() = West
 
-private fun nextTurnRight(direction: String) = changeDirection(Turn.RIGHT, direction)
+    override fun turnRight() = East
 
-private fun changeDirection(turn: Turn, direction: String) = when (direction) {
-    "N" -> when (turn) {
-        Turn.RIGHT -> "E"
-        Turn.LEFT -> "W"
-    }
-
-    "E" -> when (turn) {
-        Turn.RIGHT -> "S"
-        Turn.LEFT -> "N"
-    }
-
-    "S" -> when (turn) {
-        Turn.RIGHT -> "W"
-        Turn.LEFT -> "E"
-    }
-
-    else -> when (turn) {
-        Turn.RIGHT -> "N"
-        Turn.LEFT -> "S"
-    }
+    override fun toString() = "N"
 }
+
+object South : Direction {
+    override fun turnLeft() = East
+
+    override fun turnRight() = West
+
+    override fun toString() = "S"
+}
+
+object West : Direction {
+    override fun turnLeft() = South
+    override fun turnRight() = North
+
+    override fun toString() = "W"
+}
+
+object East : Direction {
+    override fun turnLeft() = North
+
+    override fun turnRight() = South
+
+    override fun toString() = "E"
+}
+
+
+
+
