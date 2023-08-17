@@ -4,16 +4,16 @@ fun execute(input: String): String {
 
     var direction: Direction = North
     for (character in input) {
-        val command = toCommand(character)
+        val command = character.toCommand()
         direction = when (command) {
             Command.RIGHT -> direction.turnRight()
-            Command.LEFT-> direction.turnLeft()
+            Command.LEFT -> direction.turnLeft()
         }
     }
     return "0:0:$direction"
 }
 
- fun toCommand(character: Char) = Command.values().first { it.c == character }
+fun Char.toCommand() = Command.values().first { it.c == this }
 
 
 enum class Command(val c: Char) {
