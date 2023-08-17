@@ -1,7 +1,6 @@
 package marsrover.marsrover
 
 import marsrover.execute
-import marsrover.toCommand
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -53,5 +52,33 @@ class MarsRoverTest {
         val input = "RRL"
         val output = execute(input)
         assertEquals("0:0:E", output)
+    }
+
+    @Test
+    fun  `increase Y when moving north`() {
+        val input = "M"
+        val output = execute(input)
+        assertEquals("0:1:N", output)
+    }
+
+    @Test
+    fun  `increase Y by 2 when moving north twice`() {
+        val input = "MM"
+        val output = execute(input)
+        assertEquals("0:2:N", output)
+    }
+
+    @Test
+    fun  `increase X by 1 when moving forward facing East`() {
+        val input = "RM"
+        val output = execute(input)
+        assertEquals("1:0:E", output)
+    }
+
+    @Test
+    fun  `increase X by 2 when moving forward twice facing East`() {
+        val input = "RMM"
+        val output = execute(input)
+        assertEquals("2:0:E", output)
     }
 }
